@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.views import View
-from .models import Pass_Fail_Drill
-from .forms import WoodsDrillForm
+
 
 
 class Main(View):
@@ -10,8 +9,11 @@ class Main(View):
 
 class Woods(View):
     def get(self, request):
-        form = WoodsDrillForm()
-        return render(request, 'Range/Woods.html', {'form': form,})
+        return render(request, 'Range/Woods.html', {})
+
+class WoodsTest(View):
+    def get(self, request):
+        return render(request, 'Range/WoodsTest.html', {})
 
 class Hybrids(View):
     def get(self, request):

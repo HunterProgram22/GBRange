@@ -1,5 +1,6 @@
 from django.db import models
 
+
 D1 = "Driver"
 D3 = "3 Wood"
 H3 = "3 Hybrid"
@@ -28,6 +29,7 @@ CLUBS = (   (D1, "Driver"),
             (PT, "Putter"),
             )
 
+
 TECHNICAL = "Technical"
 EXPERIMENTAL = "Experimental"
 CALIBRATION = "Calibration"
@@ -35,15 +37,18 @@ PERFORMANCE = "Performance"
 GAMES = "Routine and Games"
 TEST = "Test"
 PRACTICE_AREAS= (   (TECHNICAL, "Technical"),
-                            (EXPERIMENTAL, "Experimental"),
-                            (CALIBRATION, "Calibration"),
-                            (PERFORMANCE, "Performance"),
-                            (GAMES, "Routine and Games"),
-                            (TEST, "Test"),
-                            )
+                    (EXPERIMENTAL, "Experimental"),
+                    (CALIBRATION, "Calibration"),
+                    (PERFORMANCE, "Performance"),
+                    (GAMES, "Routine and Games"),
+                    (TEST, "Test"),
+                    )
+
+
 
 
 class Pass_Fail_Drill(models.Model):
+    '''Maybe remove Pass_Fail_Drill and use Wood_Drills'''
     name = models.CharField(max_length=200)
     date = models.DateField()
     practice_area = models.CharField(max_length=25, choices=PRACTICE_AREAS,
