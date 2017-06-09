@@ -1,4 +1,5 @@
 from django.contrib import admin
-from .models import Pass_Fail_Drill
+from .models import Woods_Test, Woods_Technical
 
-admin.site.register(Pass_Fail_Drill)
+admin.site.register(Woods_Test)
+admin.site.register(Woods_Technical)

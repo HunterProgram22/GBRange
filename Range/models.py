@@ -45,14 +45,58 @@ PRACTICE_AREAS= (   (TECHNICAL, "Technical"),
                     )
 
 
-
-
-class Pass_Fail_Drill(models.Model):
-    '''Maybe remove Pass_Fail_Drill and use Wood_Drills'''
-    name = models.CharField(max_length=200)
+class Woods_Technical(models.Model):
+    CENTER_STRIKE = 'CS'
+    ANGLE_OF_ATTACK = 'AA'
+    CLUB_FACE_PATH = 'CP'
+    WOODS_TECH_CHOICES = (
+        (CENTER_STRIKE, 'Center Face Hit'),
+        (ANGLE_OF_ATTACK, 'Upward Angle of Attack'),
+        (CLUB_FACE_PATH, 'Club Face and Path'),
+    )
     date = models.DateField()
-    practice_area = models.CharField(max_length=25, choices=PRACTICE_AREAS,
-                                        default=TECHNICAL)
-    club = models.CharField(max_length=25, choices=CLUBS)
-    balls_hit = models.IntegerField()
-    balls_succesful = models.IntegerField()
+    area = models.CharField(max_length=50, choices=WOODS_TECH_CHOICES)
+    detail = models.CharField(max_length=100)
+    level = models.IntegerField()
+    shots_hit = models.IntegerField()
+    shots_success = models.IntegerField()
+
+class Woods_Test(models.Model):
+    TOE_HIT = 'TH'
+    CENTER_HIT = 'CH'
+    HEEL_HIT = 'HH'
+    CENTER_STRIKE_CHOICES = (
+        (TOE_HIT, 'Toe Hit'),
+        (CENTER_HIT, 'Center Hit'),
+        (HEEL_HIT, 'Heel Hit'),
+    )
+    UP_ANGLE = 'UA'
+    LEVEL_ANGLE = 'LA'
+    DOWN_ANGLE = 'DA'
+    ANGLE_OF_ATTACK_CHOICES = (
+        (UP_ANGLE, 'Up Angle Hit'),
+        (LEVEL_ANGLE, 'Flat Angle Hit'),
+        (DOWN_ANGLE, 'Downward Angle Hit'),
+    )
+    MIDDLE_SHOT = 'MS'
+    HOOK_SHOT = 'HS'
+    SLICE_SHOT = 'SS'
+    CLUB_FACE_PATH_CHOICES = (
+            (MIDDLE_SHOT, 'Straight Shot'),
+            (HOOK_SHOT, 'Hook Shot'),
+            (SLICE_SHOT, 'Slice Shot'),
+        )
+    date = models.DateField()
+    balls_hit = models.IntegerField(default=20)
+    center_strike = models.CharField(
+        max_length=15,
+        choices=CENTER_STRIKE_CHOICES,
+        )
+    angle_of_attack = models.CharField(
+        max_length=15,
+        choices=ANGLE_OF_ATTACK_CHOICES,
+        )
+    club_face_path = models.CharField(
+        max_length=15,
+        choices=CLUB_FACE_PATH_CHOICES,
+        )

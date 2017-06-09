@@ -1,26 +1,16 @@
 from django import forms
-from .models import Pass_Fail_Drill
+from .models import Woods_Test, Woods_Technical
 
-TECHNICAL = "Technical"
-EXPERIMENTAL = "Experimental"
-CALIBRATION = "Calibration"
-PERFORMANCE = "Performance"
-GAMES = "Routine and Games"
-TEST = "Test"
-PRACTICE_AREAS= (   (TECHNICAL, "Technical"),
-                            (EXPERIMENTAL, "Experimental"),
-                            (CALIBRATION, "Calibration"),
-                            (PERFORMANCE, "Performance"),
-                            (GAMES, "Routine and Games"),
-                            (TEST, "Test"),
-                            )
-
-class WoodsDrillForm(forms.ModelForm):
+class Woods_Test_Form(forms.ModelForm):
 
     class Meta:
-        model = Pass_Fail_Drill
-        fields = ['name', 'date', 'practice_area', 'club',
-                    'balls_hit', 'balls_succesful']
-        widgets = {
-                    'practice_area': forms.RadioSelect(choices=PRACTICE_AREAS),
-                    }
+        model = Woods_Test
+        fields = ('date', 'balls_hit', 'center_strike', 'angle_of_attack',
+        'club_face_path')
+
+class Woods_Technical_Form(forms.ModelForm):
+
+    class Meta:
+        model = Woods_Technical
+        fields = ('date', 'area', 'detail', 'level', 'shots_hit',
+        'shots_success')
