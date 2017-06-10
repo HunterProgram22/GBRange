@@ -69,8 +69,28 @@
     </form>
   </div>
 
-  <div id='topright'>
-    <p>Level 1: </p>
+  <input type="radio" name="data" onclick="showclub()" id="buttonclub" checked="checked"> Club Path
+  <input type="radio" name="data" onclick="showcenter()" id="buttonclub"> Center Hit
+  <input type="radio" name="data" onclick="showangle()" id="buttonclub"> Angle of Attack<br>
+
+  <div id='clubpath'>
+    <p>Level 1: Club </p>
+    <p>Level 2: </p>
+    <p>Level 3: </p>
+    <p>Level 4: </p>
+    <p>Level 5: </p>
+    <p>Level 6: </p>
+  </div>
+  <div id='centerstrike' style="display: none;">
+    <p>Level 1: Center </p>
+    <p>Level 2: </p>
+    <p>Level 3: </p>
+    <p>Level 4: </p>
+    <p>Level 5: </p>
+    <p>Level 6: </p>
+  </div>
+  <div id='angleofattack' style="display: none;">
+    <p>Level 1: Angle </p>
     <p>Level 2: </p>
     <p>Level 3: </p>
     <p>Level 4: </p>
@@ -109,6 +129,22 @@
     var stringdate = stringmonth + '/' + today.getDate() + '/' +
         today.getFullYear();
     document.getElementById('id_date').value = stringdate;
+
+    function showclub() {
+      document.getElementById('clubpath').style.display="block";
+      document.getElementById('angleofattack').style.display="none";
+      document.getElementById('centerstrike').style.display="none";
+    }
+    function showcenter() {
+      document.getElementById('clubpath').style.display="none";
+      document.getElementById('angleofattack').style.display="none";
+      document.getElementById('centerstrike').style.display="block";
+    }
+    function showangle() {
+      document.getElementById('clubpath').style.display="none";
+      document.getElementById('angleofattack').style.display="block";
+      document.getElementById('centerstrike').style.display="none";
+    }
 </script>
 
 {% endblock %}
