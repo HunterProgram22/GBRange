@@ -1,6 +1,5 @@
 from django.db import models
 
-
 D1 = "Driver"
 D3 = "3 Wood"
 H3 = "3 Hybrid"
@@ -14,52 +13,112 @@ GW = "Gap Wedge 50"
 SW = "Sand Wedge 54"
 LW = "Lob Wedge 58"
 PT = "Putter"
-CLUBS = (   (D1, "Driver"),
-            (D3, "3 Wood"),
-            (H3, "3 Hybrid"),
-            (I5, "5 Iron"),
-            (I6, "6 Iron"),
-            (I7, "7 Iron"),
-            (I8, "8 Iron"),
-            (I9, "9 Iron"),
-            (PW, "Pitch Wedge 45"),
-            (GW, "Gap Wedge 50"),
-            (SW, "Sand Wedge 54"),
-            (LW, "Lob Wedge 58"),
-            (PT, "Putter"),
-            )
+
+CENTER_STRIKE = 'CS'
+ANGLE_OF_ATTACK = 'AA'
+CLUB_FACE_PATH = 'CP'
+DIVOT_LOCATION = 'DL'
+WEDGE_DIRECTION = 'WX'
+WEDGE_DISTANCE = 'WD'
+CHIPPING_DIRECTION = 'CX'
+CHIPPING_DISTANCE = 'CD'
+SPEED = 'PS'
+PUTTING_LINE = 'PL'
 
 
-TECHNICAL = "Technical"
-EXPERIMENTAL = "Experimental"
-CALIBRATION = "Calibration"
-PERFORMANCE = "Performance"
-GAMES = "Routine and Games"
-TEST = "Test"
-PRACTICE_AREAS= (   (TECHNICAL, "Technical"),
-                    (EXPERIMENTAL, "Experimental"),
-                    (CALIBRATION, "Calibration"),
-                    (PERFORMANCE, "Performance"),
-                    (GAMES, "Routine and Games"),
-                    (TEST, "Test"),
-                    )
 
-
-class Woods_Technical(models.Model):
-    CENTER_STRIKE = 'CS'
-    ANGLE_OF_ATTACK = 'AA'
-    CLUB_FACE_PATH = 'CP'
-    WOODS_TECH_CHOICES = (
-        (CENTER_STRIKE, 'Center Face Hit'),
-        (ANGLE_OF_ATTACK, 'Upward Angle of Attack'),
-        (CLUB_FACE_PATH, 'Club Face and Path'),
-    )
+class Technical_Drills(models.Model):
     date = models.DateField()
-    area = models.CharField(max_length=50, choices=WOODS_TECH_CHOICES)
     detail = models.CharField(max_length=100)
     level = models.IntegerField()
     shots_hit = models.IntegerField()
     shots_success = models.IntegerField()
+
+    class Meta:
+        abstract = True
+
+class Woods_Technical(Technical_Drills):
+    TECH_CHOICES = (
+                (CENTER_STRIKE, 'Center Face Hit'),
+                (ANGLE_OF_ATTACK, 'Upward Angle of Attack'),
+                (CLUB_FACE_PATH, 'Club Face and Path'),
+            )
+    area = models.CharField(max_length=50, choices=TECH_CHOICES)
+    WOOD_CLUBS = (
+                    (D1, 'Driver'),
+                    (D3, 'Three Wood'),
+                )
+    club = models.CharField(max_length=15, choices=WOOD_CLUBS)
+
+
+class Hybrids_Technical(Technical_Drills):
+    TECH_CHOICES = (
+                (CENTER_STRIKE, 'Center Face Hit'),
+                (DIVOT_LOCATION, 'Divot Location'),
+                (CLUB_FACE_PATH, 'Club Face and Path'),
+            )
+    area = models.CharField(max_length=50, choices=TECH_CHOICES)
+    HYBRID_CLUBS = (
+                    (H3, '3 Hybrid'),
+                )
+    club = models.CharField(max_length=15, choices=HYBRID_CLUBS)
+
+class Irons_Technical(Technical_Drills):
+    TECH_CHOICES = (
+                (CENTER_STRIKE, 'Center Face Hit'),
+                (DIVOT_LOCATION, 'Divot Location'),
+                (CLUB_FACE_PATH, 'Club Face and Path'),
+            )
+    area = models.CharField(max_length=50, choices=TECH_CHOICES)
+    IRON_CLUBS = (
+                (I5, '5 Iron'),
+                (I6, '6 Iron'),
+                (I7, '7 Iron'),
+                (I8, '8 Iron'),
+                (I9, '9 Iron'),
+            )
+    club = models.CharField(max_length=15, choices=IRON_CLUBS)
+
+class Wedges_Technical(Technical_Drills):
+    TECH_CHOICES = (
+                (CENTER_STRIKE, 'Center Face Hit'),
+                (WEDGE_DIRECTION, 'Wedge Direction'),
+                (WEDGE_DISTANCE, 'Wedge Distance'),
+                (DIVOT_LOCATION, 'Divot Location'),
+            )
+    area = models.CharField(max_length=50, choices=TECH_CHOICES)
+    WEDGE_CLUBS = (
+                (PW, 'Pitching Wedge 45'),
+                (GW, 'Gap Wedge 50'),
+                (SW, 'Sand Wedge 54'),
+                (LW, 'Lob Wedge 58'),
+            )
+    club = models.CharField(max_length=20, choices=WEDGE_CLUBS)
+
+class Chipping_Technical(Technical_Drills):
+    TECH_CHOICES = (
+                (CENTER_STRIKE, 'Center Face Hit'),
+                (CHIPPING_DIRECTION, 'Chipping Direction'),
+                (CHIPPING_DISTANCE, 'Chipping Distance'),
+            )
+    area = models.CharField(max_length=50, choices=TECH_CHOICES)
+    CHIPPING_CLUBS = (
+                (I9, '9 Iron'),
+                (PW, 'Pitching Wedge 45'),
+                (GW, 'Gap Wedge 50'),
+                (SW, 'Sand Wedge 54'),
+                (LW, 'Lob Wedge 58'),
+            )
+    club = models.CharField(max_length=20, choices=CHIPPING_CLUBS)
+
+class Putting_Technical(Technical_Drills):
+    TECH_CHOICES = (
+                (SPEED, 'Putting Speed'),
+                (PUTTING_LINE, 'Putting Line'),
+            )
+    area = models.CharField(max_length=50, choices=TECH_CHOICES)
+
+
 
 class Woods_Test(models.Model):
     TOE_HIT = 'TH'
