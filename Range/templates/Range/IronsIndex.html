@@ -14,6 +14,13 @@
 		<script src="{% static 'Range/js/modernizr.custom.js' %}"></script>
 	</head>
 	<body>
+
+		<div id="header">
+		<a href="{% url 'RangeMain' %}">
+		  <span>Home</span>
+		</a>
+		</div>
+
 		<div class="container">
 
 			<header>
@@ -23,7 +30,7 @@
 				<nav id="menu" class="nav">
 					<ul>
 						<li>
-							<a href="#">
+							<a href="{% url 'IronsTest' %}">
 								<span class="icon">
 									<i aria-hidden="true" class="icon-home"></i>
 								</span>
@@ -39,7 +46,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="{% url 'IronsExperimental' %}">
 								<span class="icon">
 									<i aria-hidden="true" class="icon-portfolio"></i>
 								</span>
@@ -47,7 +54,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="{% url 'IronsCalibration' %}">
 								<span class="icon">
 									<i aria-hidden="true" class="icon-blog"></i>
 								</span>
@@ -55,7 +62,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="{% url 'IronsPerformance' %}">
 								<span class="icon">
 									<i aria-hidden="true" class="icon-team"></i>
 								</span>
@@ -63,7 +70,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="{% url 'IronsGames' %}">
 								<span class="icon">
 									<i aria-hidden="true" class="icon-contact"></i>
 								</span>

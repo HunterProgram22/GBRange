@@ -1,0 +1,46 @@
+{% extends 'Range/ExperimentalHeader.html' %}
+
+{% block content %}
+
+<head>
+  <title>Putting Experimental</title>
+  <style>
+    html {
+      border: solid 10px brown;
+      box-shadow: inset 0 0 0 5px peru;
+    }
+  </style>
+</head>
+<body>
+<h1>Putting Experimental</h1>
+<div id='drillrow'>
+  <input type="radio" name="data" onclick="showclubpath()" id="buttonclub" checked="checked"> Speed
+  <input type="radio" name="data" onclick="showcenterstrike()" id="buttonclub"> Line <br>
+
+  <div id='clubpath'>
+    <p><b>Speed<b></p>
+      <ul>
+        <li>Drill 1</li>
+        <li>Drill 2</li>
+        <li>Drill 3</li>
+      </ul>
+  </div>
+  <div id='centerstrike' style="display: none;">
+    <p><b>Line<b></p>
+      <ul>
+        <li>Drill 1</li>
+        <li>Drill 2</li>
+        <li>Drill 3</li>
+      </ul>
+  </div>
+  <div id='divot' style="display: none;">
+    <p><b>No Data<b></p>
+      <ul>
+        <li>Drill 1</li>
+        <li>Drill 2</li>
+        <li>Drill 3</li>
+      </ul>
+  </div>
+</div>
+</body>
+{% endblock %}
