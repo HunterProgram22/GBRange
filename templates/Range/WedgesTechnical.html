@@ -1,0 +1,55 @@
+{% extends 'Range/TechnicalHeader.html' %}
+
+{% block content %}
+
+<head>
+  <title>Wedges Technical</title>
+  <style>
+    html {
+      border: solid 10px purple;
+    }
+  </style>
+</head>
+<body>
+<h1>Wedges Technical</h1>
+<div id='drillrow'>
+  <input type="radio" name="data" onclick="showclubhook()" id="buttonclub" checked="checked"> Direction
+  <input type="radio" name="data" onclick="showclubslice()" id="buttonclub"> Distance
+  <input type="radio" name="data" onclick="showcenter()" id="buttonclub"> Center Hit
+  <input type="radio" name="data" onclick="showangle()" id="buttonclub"> Divot Location<br>
+
+  <div id='clubpathhook'>
+    <p><b>Level 1:</b> Direction </p>
+    <p><b>Level 2:</b> </p>
+    <p><b>Level 3:</b> </p>
+    <p><b>Level 4:</b> </p>
+    <p><b>Level 5:</b> </p>
+    <p><b>Level 6:</b> </p>
+  </div>
+  <div id='clubpathslice' style="display: none;">
+    <p><b>Level 1:</b> Distance </p>
+    <p><b>Level 2:</b> </p>
+    <p><b>Level 3:</b> </p>
+    <p><b>Level 4:</b> </p>
+    <p><b>Level 5:</b> </p>
+    <p><b>Level 6:</b> </p>
+  </div>
+  <div id='centerstrike' style="display: none;">
+    <p><b>Level 1:</b> Center Strike</p>
+    <p><b>Level 2:</b> </p>
+    <p><b>Level 3:</b> </p>
+    <p><b>Level 4:</b> </p>
+    <p><b>Level 5:</b> </p>
+    <p><b>Level 6:</b> </p>
+  </div>
+  <div id='angleofattack' style="display: none;">
+    <p><b>Level 1:</b> Divot Location</p>
+    <p><b>Level 2:</b> </p>
+    <p><b>Level 3:</b> </p>
+    <p><b>Level 4:</b> </p>
+    <p><b>Level 5:</b> </p>
+    <p><b>Level 6:</b> </p>
+  </div>
+</div>
+</body>
+{% endblock %}

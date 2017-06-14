@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+{% load static %}
+
+</head>
+<div id="header">
+<a href="{% url 'RangeMain' %}">
+  <span>Home</span>
+</a>
+</div>
+
+<style>
+body {
+  margin: 15px;
+}
+div, table {
+  padding: 5px;
+}
+
+th {
+  text-align: left;
+}
+#databox{
+  border: 2px solid green;
+  padding: 5px;
+  width: auto;
+}
+#formbox{
+  width: auto;
+  border: 2px solid black;
+}
+.gb1{
+         margin: 4px 2px 4px 2px;
+         width: 100px;
+     }
+</style>
+<script>
+var attempts = 0;
+var makes = 0;
+function attempt() {
+  attempts += 1;
+  document.getElementById("id_shots_hit").value = attempts;
+};
+function make() {
+  attempts += 1;
+  makes += 1;
+  document.getElementById("id_shots_hit").value = attempts;
+  document.getElementById("id_shots_success").value = makes;
+};
+</script>
+
+<div id='formbox'>
+   <form method="POST">{% csrf_token %}
+       <p class="gb1">Date: {{ form.date }}</p>
+       <p class="gb1">Area: {{ form.area }}</p>
+       <p class="gb1">Detail: {{ form.detail }}</p>
+       <p class="gb1">Level: {{ form.level }}</p>
+       <p class="gb1">Club: {{ form.club }}</p>
+
+       <button class="gb1" type="button" onclick="attempt()">Shot Miss</button>
+       <button class="gb1" type="button" onclick="make()">Shot Success</button><br>
+
+       <p class="gb1">Shots Hit: {{ form.shots_hit }}</p>
+       <p class="gb1">Shots Success: {{ form.shots_success }}</p>
+
+
+      <button class="gb1" type="submit" class="save btn btn-default">Submit</button>
+  </form>
+</div>
+
+{% block content %}
+
+{% endblock %}
+<div id="techsheet">
+  <table width="100%" style="border: 3px solid black;">
+    <tr style="border: 1px solid black;">
+      <th>Date</th>
+      <th>Area</th>
+      <th>Detail</th>
+      <th>Level</th>
+      <th>Club</th>
+      <th>Shots Hit</th>
+      <th>Shots Success</th>
+    </tr>
+    {% for shot in shots %}
+    <tr>
+        <td>{{ shot.date }}</td>
+        <td>{{ shot.area }}</td>
+        <td>{{ shot.detail }}</td>
+        <td>{{ shot.level }}</td>
+        <td>{{ shot.club }}</td>
+        <td>{{ shot.shots_hit }}</td>
+        <td>{{ shot.shots_success }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+</div>
+
+<script>
+  var today = new Date();
+  var stringmonth = 1 + today.getMonth();
+  var stringdate = stringmonth + '/' + today.getDate() + '/' +
+      today.getFullYear();
+  document.getElementById('id_date').value = stringdate;
+
+  function showclubhook() {
+    document.getElementById('clubpathhook').style.display="block";
+    document.getElementById('clubpathslice').style.display="none";
+    document.getElementById('angleofattack').style.display="none";
+    document.getElementById('centerstrike').style.display="none";
+  }
+  function showclubslice() {
+    document.getElementById('clubpathhook').style.display="none";
+    document.getElementById('clubpathslice').style.display="block";
+    document.getElementById('angleofattack').style.display="none";
+    document.getElementById('centerstrike').style.display="none";
+  }
+  function showcenter() {
+    document.getElementById('clubpathhook').style.display="none";
+    document.getElementById('clubpathslice').style.display="none";
+    document.getElementById('angleofattack').style.display="none";
+    document.getElementById('centerstrike').style.display="block";
+  }
+  function showangle() {
+    document.getElementById('clubpathhook').style.display="none";
+    document.getElementById('clubpathslice').style.display="none";
+    document.getElementById('angleofattack').style.display="block";
+    document.getElementById('centerstrike').style.display="none";
+  }
+</script>
+</html>
