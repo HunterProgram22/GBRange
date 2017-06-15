@@ -1,0 +1,25 @@
+<style>
+  .gb1{
+    margin: 4px 2px 4px 2px;
+    width: 100px;
+  }
+</style>
+
+<h3>Woods Test</h3>
+
+<div id='topleft'>
+     <form method="POST">{% csrf_token %}
+         <p class="gb1">Date: {{ form.date }}</p>
+
+         {% for i in range %}
+         <p><b>Shot: {{ i }}</b></p>
+         <p class="gb1">Strike: {{ form.center_strike }}</p>
+         <p class="gb1">AofA: {{ form.angle_of_attack }}</p>
+         <p class="gb1">Path: {{ form.club_face_path }}</p>
+         {% endfor %}
+
+        <button class="gb1" type="submit" class="save btn btn-default">Submit</button>
+
+
+    </form>
+</div>

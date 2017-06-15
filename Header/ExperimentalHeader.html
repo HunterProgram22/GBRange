@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+{% load static %}
+
+</head>
+<div id="header">
+<a href="{% url 'RangeMain' %}">
+  <span>Home</span>
+</a>
+</div>
+
+<style>
+body {
+  margin: 15px;
+}
+div, table {
+  padding: 5px;
+}
+
+th {
+  text-align: left;
+}
+#databox{
+  border: 2px solid green;
+  padding: 5px;
+  width: auto;
+}
+#formbox{
+  width: auto;
+  border: 2px solid black;
+}
+.gb1{
+         margin: 4px 2px 4px 2px;
+         width: 100px;
+     }
+</style>
+
+<div id='formbox'>
+   <form method="POST">{% csrf_token %}
+       <p class="gb1">Date: {{ form.date }}</p>
+       <p class="gb1">Drill: {{ form.drill }}</p>
+       <p class="gb1">Detail: {{ form.detail }}</p>
+       <p class="gb1">Club: {{ form.club }}</p>
+       <p class="gb1">Shots Hit: {{ form.shots_hit }}</p>
+      <button class="gb1" type="submit" class="save btn btn-default">Submit</button>
+  </form>
+</div>
+
+{% block content %}
+
+{% endblock %}
+<div id="techsheet">
+  <table width="100%" style="border: 3px solid black;">
+    <tr style="border: 1px solid black;">
+      <th>Date</th>
+      <th>Drill</th>
+      <th>Detail</th>
+      <th>Club</th>
+      <th>Shots Hit</th>
+    </tr>
+    {% for shot in shots %}
+    <tr>
+        <td>{{ shot.date }}</td>
+        <td>{{ shot.drill }}</td>
+        <td>{{ shot.detail }}</td>
+        <td>{{ shot.club }}</td>
+        <td>{{ shot.shots_hit }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+</div>
+
+<script>
+  var today = new Date();
+  var stringmonth = 1 + today.getMonth();
+  var stringdate = stringmonth + '/' + today.getDate() + '/' +
+      today.getFullYear();
+  document.getElementById('id_date').value = stringdate;
+
+  function showclubpath() {
+    document.getElementById('clubpath').style.display="block";
+    document.getElementById('centerstrike').style.display="none";
+    document.getElementById('divot').style.display="none";
+  }
+  function showcenterstrike() {
+    document.getElementById('clubpath').style.display="none";
+    document.getElementById('centerstrike').style.display="block";
+    document.getElementById('divot').style.display="none";
+  }
+  function showdivot() {
+    document.getElementById('clubpath').style.display="none";
+    document.getElementById('centerstrike').style.display="none";
+    document.getElementById('divot').style.display="block";
+  }
+</script>
+</html>
