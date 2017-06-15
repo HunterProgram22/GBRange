@@ -1,54 +1,35 @@
 {% extends 'Range/Header/TechnicalHeader.html' %}
 
-{% block content %}
-
-<head>
-  <title>Putting Technical</title>
-  <style>
-    html {
-      border: solid 10px brown;
-      box-shadow: inset 0 0 0 5px peru;
-    }
-  </style>
-</head>
-<body>
-<h1>Putting Technical</h1>
-<div id='drillrow'>
-  <input type="radio" name="data" onclick="showclubhook()" id="buttonclub" checked="checked"> Speed
-  <input type="radio" name="data" onclick="showclubslice()" id="buttonclub"> Line <br>
-
-  <div id='clubpathhook'>
-    <p><b>Level 1:</b> Speed </p>
-    <p><b>Level 2:</b> </p>
-    <p><b>Level 3:</b> </p>
-    <p><b>Level 4:</b> </p>
-    <p><b>Level 5:</b> </p>
-    <p><b>Level 6:</b> </p>
-  </div>
-  <div id='clubpathslice' style="display: none;">
-    <p><b>Level 1:</b> Line </p>
-    <p><b>Level 2:</b> </p>
-    <p><b>Level 3:</b> </p>
-    <p><b>Level 4:</b> </p>
-    <p><b>Level 5:</b> </p>
-    <p><b>Level 6:</b> </p>
-  </div>
-  <div id='centerstrike' style="display: none;">
-    <p><b>Level 1:</b> No Data</p>
-    <p><b>Level 2:</b> </p>
-    <p><b>Level 3:</b> </p>
-    <p><b>Level 4:</b> </p>
-    <p><b>Level 5:</b> </p>
-    <p><b>Level 6:</b> </p>
-  </div>
-  <div id='angleofattack' style="display: none;">
-    <p><b>Level 1:</b> No Data</p>
-    <p><b>Level 2:</b> </p>
-    <p><b>Level 3:</b> </p>
-    <p><b>Level 4:</b> </p>
-    <p><b>Level 5:</b> </p>
-    <p><b>Level 6:</b> </p>
-  </div>
-</div>
-</body>
+{% block style %}
+  {% include 'Range/Style/PuttingStyle.html' %}
 {% endblock %}
+
+{% block title %}Putting Technical{% endblock%}
+
+{% block pageheader %}Putting Technical{% endblock %}
+
+{% block buttonclub1 %}Distance{% endblock %}
+{% block buttonclub2 %}Line{% endblock %}
+{% block buttonclub3 %}{% endblock %}
+
+{% block drillarea1 %}Distance{% endblock %}
+  {% block drill1-1 %}Block practice 10 shots - 5 feet.{% endblock %}
+  {% block drill1-2 %}Routine practice 10 shots - 5 feet.{% endblock %}
+  {% block drill1-3 %}Routine practice 10 shots - 10 feet.{% endblock %}
+  {% block drill1-4 %}Routine practice 10 shots - 15 feet.{% endblock %}
+  {% block drill1-5 %}Routine practice 10 shots - 25 feet.{% endblock %}
+  {% block drill1-6 %}Routine practice 10 shots - 35 feet.{% endblock %}
+{% block drillarea2 %}Line{% endblock %}
+  {% block drill2-1 %}{% endblock %}
+  {% block drill2-2 %}{% endblock %}
+  {% block drill2-3 %}{% endblock %}
+  {% block drill2-4 %}{% endblock %}
+  {% block drill2-5 %}{% endblock %}
+  {% block drill2-6 %}{% endblock %}
+{% block drillarea3 %}{% endblock %}
+  {% block drill3-1 %}{% endblock %}
+  {% block drill3-2 %}{% endblock %}
+  {% block drill3-3 %}{% endblock %}
+  {% block drill3-4 %}{% endblock %}
+  {% block drill3-5 %}{% endblock %}
+  {% block drill3-6 %}{% endblock %}
