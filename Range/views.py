@@ -12,11 +12,11 @@ from .forms import Woods_Test_Form, Woods_Technical_Form, Hybrids_Technical_Form
 
 class Main(View):
     def get(self, request):
-        return render(request, 'Range/Main.html', {})
+        return render(request, 'Range/MainMenu.html', {})
 
 class Woods(View):
     def get(self, request):
-        return render(request, 'Range/Woods.html', {})
+        return render(request, 'Range/Woods/WoodsMenu.html', {})
 
 class WoodsCalibration(View):
     pass
@@ -31,7 +31,7 @@ class WoodsExperimental(View):
     def get(self, request):
         form = Woods_Experimental_Form()
         shots = Woods_Experimental.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/WoodsExperimental.html', {'form': form,
+        return render(request, 'Range/Woods/WoodsExperimental.html', {'form': form,
                                                                 'shots': shots})
 
     def post(self, request):
@@ -40,13 +40,13 @@ class WoodsExperimental(View):
             dataform.save()
         form = Woods_Experimental_Form()
         shots = Woods_Experimental.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/WoodsExperimental.html', {'form': form,
+        return render(request, 'Range/Woods/WoodsExperimental.html', {'form': form,
                                                                 'shots': shots})
 
 class WoodsTest(View):
     def get(self, request):
         form = Woods_Test_Form()
-        return render(request, 'Range/WoodsTest.html', {'form':form,
+        return render(request, 'Range/Woods/WoodsTest.html', {'form':form,
                                                         'range':range(3)
                                                         })
 
@@ -54,7 +54,7 @@ class WoodsTechnical(View):
     def get(self, request):
         form = Woods_Technical_Form()
         shots = Woods_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/WoodsTechnical.html', {'form': form,
+        return render(request, 'Range/Woods/WoodsTechnical.html', {'form': form,
                                                              'shots': shots})
 
     def post(self, request):
@@ -63,13 +63,13 @@ class WoodsTechnical(View):
             dataform.save()
         form = Woods_Technical_Form()
         shots = Woods_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/WoodsTechnical.html', {'form': form,
+        return render(request, 'Range/Woods/WoodsTechnical.html', {'form': form,
                                                              'shots': shots})
 
 
 class Hybrids(View):
     def get(self, request):
-        return render(request, 'Range/Hybrids.html', {})
+        return render(request, 'Range/Hybrids/HybridsMenu.html', {})
 
 class HybridsTest(View):
     pass
@@ -90,7 +90,7 @@ class HybridsTechnical(View):
     def get(self, request):
         form = Hybrids_Technical_Form()
         shots = Hybrids_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/HybridsTechnical.html', {'form': form,
+        return render(request, 'Range/Hybrids/HybridsTechnical.html', {'form': form,
                                                                'shots': shots})
 
     def post(self, request):
@@ -99,12 +99,12 @@ class HybridsTechnical(View):
             dataform.save()
         form = Hybrids_Technical_Form()
         shots = Hybrids_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/HybridsTechnical.html', {'form': form,
+        return render(request, 'Range/Hybrids/HybridsTechnical.html', {'form': form,
                                                                'shots': shots})
 
 class Irons(View):
     def get(self, request):
-        return render(request, 'Range/Irons.html', {})
+        return render(request, 'Range/Irons/IronsMenu.html', {})
 
 class IronsTest(View):
     pass
@@ -125,7 +125,7 @@ class IronsTechnical(View):
     def get(self, request):
         form = Irons_Technical_Form()
         shots = Irons_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/IronsTechnical.html', {'form': form,
+        return render(request, 'Range/Irons/IronsTechnical.html', {'form': form,
                                                              'shots': shots})
 
     def post(self, request):
@@ -134,12 +134,12 @@ class IronsTechnical(View):
             dataform.save()
         form = Irons_Technical_Form()
         shots = Irons_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/IronsTechnical.html', {'form': form,
+        return render(request, 'Range/Irons/IronsTechnical.html', {'form': form,
                                                              'shots': shots})
 
 class Wedges(View):
     def get(self, request):
-        return render(request, 'Range/Wedges.html', {})
+        return render(request, 'Range/Wedges/WedgesMenu.html', {})
 
 class WedgesTest(View):
     pass
@@ -157,7 +157,7 @@ class WedgesTechnical(View):
     def get(self, request):
         form = Wedges_Technical_Form()
         shots = Wedges_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/WedgesTechnical.html', {'form': form,
+        return render(request, 'Range/Wedges/WedgesTechnical.html', {'form': form,
                                                               'shots': shots})
 
     def post(self, request):
@@ -166,14 +166,14 @@ class WedgesTechnical(View):
             dataform.save()
         form = Wedges_Technical_Form()
         shots = Wedges_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/WedgesTechnical.html', {'form': form,
+        return render(request, 'Range/Wedges/WedgesTechnical.html', {'form': form,
                                                               'shots': shots})
 
 class WedgesExperimental(View):
     def get(self, request):
         form = Wedges_Experimental_Form()
         shots = Wedges_Experimental.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/WedgesExperimental.html', {'form': form,
+        return render(request, 'Range/Wedges/WedgesExperimental.html', {'form': form,
                                                                  'shots': shots})
 
     def post(self, request):
@@ -182,13 +182,13 @@ class WedgesExperimental(View):
             dataform.save()
         form = Wedges_Experimental_Form()
         shots = Wedges_Experimental.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/WedgesExperimental.html', {'form': form,
+        return render(request, 'Range/Wedges/WedgesExperimental.html', {'form': form,
                                                                  'shots': shots})
 
 
 class Chipping(View):
     def get(self, request):
-        return render(request, 'Range/Chipping.html', {})
+        return render(request, 'Range/Chipping/ChippingMenu.html', {})
 
 class ChippingTest(View):
     pass
@@ -209,7 +209,7 @@ class ChippingTechnical(View):
     def get(self, request):
         form = Chipping_Technical_Form()
         shots = Chipping_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/ChippingTechnical.html', {'form': form,
+        return render(request, 'Range/Chipping/ChippingTechnical.html', {'form': form,
                                                                 'shots': shots})
 
     def post(self, request):
@@ -218,12 +218,12 @@ class ChippingTechnical(View):
             dataform.save()
         form = Chipping_Technical_Form()
         shots = Chipping_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/ChippingTechnical.html', {'form': form,
+        return render(request, 'Range/Chipping/ChippingTechnical.html', {'form': form,
                                                                 'shots': shots})
 
 class Putting(View):
     def get(self, request):
-        return render(request, 'Range/Putting.html', {})
+        return render(request, 'Range/Putting/PuttingMenu.html', {})
 
 class PuttingTest(View):
     pass
@@ -241,7 +241,7 @@ class PuttingTechnical(View):
     def get(self, request):
         form = Putting_Technical_Form()
         shots = Putting_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/PuttingTechnical.html', {'form': form,
+        return render(request, 'Range/Putting/PuttingTechnical.html', {'form': form,
                                                                'shots': shots})
 
     def post(self, request):
@@ -250,14 +250,14 @@ class PuttingTechnical(View):
             dataform.save()
         form = Putting_Technical_Form()
         shots = Putting_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/PuttingTechnical.html', {'form': form,
+        return render(request, 'Range/Putting/PuttingTechnical.html', {'form': form,
                                                                'shots': shots})
 
 class PuttingExperimental(View):
     def get(self, request):
         form = Putting_Experimental_Form()
         shots = Putting_Experimental.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/PuttingExperimental.html', {'form': form,
+        return render(request, 'Range/Putting/PuttingExperimental.html', {'form': form,
                                                                   'shots': shots})
 
     def post(self, request):
@@ -266,5 +266,5 @@ class PuttingExperimental(View):
             dataform.save()
         form = Putting_Experimental_Form()
         shots = Putting_Experimental.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/PuttingExperimental.html', {'form': form,
+        return render(request, 'Range/Putting/PuttingExperimental.html', {'form': form,
                                                                   'shots': shots})

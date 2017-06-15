@@ -1,0 +1,56 @@
+{% extends 'Range/Header/TechnicalHeader.html' %}
+
+{% block content %}
+
+<head>
+  <title>Woods Technical</title>
+  <style>
+    html {
+      border: solid 10px green;
+      box-shadow: inset 0 0 0 5px limegreen;
+    }
+  </style>
+</head>
+<body>
+<h1>Woods Technical</h1>
+<div id='drillrow'>
+  <input type="radio" name="data" onclick="showclubhook()" id="buttonclub" checked="checked"> Club Path Hook
+  <input type="radio" name="data" onclick="showclubslice()" id="buttonclub"> Club Path Slice
+  <input type="radio" name="data" onclick="showcenter()" id="buttonclub"> Center Hit
+  <input type="radio" name="data" onclick="showangle()" id="buttonclub"> Angle of Attack<br>
+
+  <div id='clubpathhook'>
+    <p><b>Level 1:</b> Club Path Hook </p>
+    <p><b>Level 2:</b> </p>
+    <p><b>Level 3:</b> </p>
+    <p><b>Level 4:</b> </p>
+    <p><b>Level 5:</b> </p>
+    <p><b>Level 6:</b> </p>
+  </div>
+  <div id='clubpathslice' style="display: none;">
+    <p><b>Level 1:</b> Club Path Slice </p>
+    <p><b>Level 2:</b> </p>
+    <p><b>Level 3:</b> </p>
+    <p><b>Level 4:</b> </p>
+    <p><b>Level 5:</b> </p>
+    <p><b>Level 6:</b> </p>
+  </div>
+  <div id='centerstrike' style="display: none;">
+    <p><b>Level 1:</b> Center Strike</p>
+    <p><b>Level 2:</b> </p>
+    <p><b>Level 3:</b> </p>
+    <p><b>Level 4:</b> </p>
+    <p><b>Level 5:</b> </p>
+    <p><b>Level 6:</b> </p>
+  </div>
+  <div id='angleofattack' style="display: none;">
+    <p><b>Level 1:</b> Angle of Attack</p>
+    <p><b>Level 2:</b> </p>
+    <p><b>Level 3:</b> </p>
+    <p><b>Level 4:</b> </p>
+    <p><b>Level 5:</b> </p>
+    <p><b>Level 6:</b> </p>
+  </div>
+</div>
+</body>
+{% endblock %}

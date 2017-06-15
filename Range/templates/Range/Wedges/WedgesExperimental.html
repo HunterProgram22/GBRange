@@ -1,0 +1,47 @@
+{% extends 'Range/Header/ExperimentalHeader.html' %}
+
+{% block content %}
+
+<head>
+  <title>Wedges Experimental</title>
+  <style>
+    html {
+      border: solid 10px purple;
+      box-shadow: inset 0 0 0 5px orchid;
+    }
+  </style>
+</head>
+<body>
+<h1>Wedges Experimental</h1>
+<div id='drillrow'>
+  <input type="radio" name="data" onclick="showclubpath()" id="buttonclub" checked="checked"> Direction
+  <input type="radio" name="data" onclick="showcenterstrike()" id="buttonclub"> Center Strike
+  <input type="radio" name="data" onclick="showdivot()" id="buttonclub"> Distance<br>
+
+  <div id='clubpath'>
+    <p><b>Direction<b></p>
+      <ul>
+        <li>Drill 1</li>
+        <li>Drill 2</li>
+        <li>Drill 3</li>
+      </ul>
+  </div>
+  <div id='centerstrike' style="display: none;">
+    <p><b>Center Strike<b></p>
+      <ul>
+        <li>Drill 1</li>
+        <li>Drill 2</li>
+        <li>Drill 3</li>
+      </ul>
+  </div>
+  <div id='divot' style="display: none;">
+    <p><b>Distance<b></p>
+      <ul>
+        <li>Drill 1</li>
+        <li>Drill 2</li>
+        <li>Drill 3</li>
+      </ul>
+  </div>
+</div>
+</body>
+{% endblock %}
