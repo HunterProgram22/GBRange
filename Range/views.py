@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import View
+from django.apps import apps
 from .models import Woods_Technical, Hybrids_Technical, Irons_Technical, \
     Wedges_Technical, Chipping_Technical, Putting_Technical, Woods_Experimental, \
     Wedges_Experimental, Putting_Experimental, Irons_Experimental, \
@@ -10,7 +11,9 @@ from .forms import Woods_Test_Form, Woods_Technical_Form, Hybrids_Technical_Form
     Putting_Experimental_Form, Irons_Experimental_Form, Hybrids_Experimental_Form, \
     Chipping_Experimental_Form
 
-
+forms = {'Woods_Experimental_Form':Woods_Experimental_Form()}
+forms2 = {'Woods_Experimental_Form':Woods_Experimental_Form}
+models = {'Woods_Experimental':Woods_Experimental.objects.all().order_by('-date', '-pk')}
 
 class Main(View):
     def get(self, request):
@@ -29,26 +32,20 @@ class WoodsPerformance(View):
 class WoodsGames(View):
     pass
 
-'''Use class based views that inherit and that use the request name of the page (i.e.
-woods and append it to 'experimental form' or whatever else is needed - BOOM!'''
-'''class BaseExperimentalView(View):
-    def get(self, request):
-        formname = 'request' + '_Experimental_Form()'
-        form = formname
-        shotsname = 'request' + '_Experimental.objects.all().order_by('-date', '-pk')'
-        shots = shotsname /this and form above line may be unecessary
-        
-    class WoodsExperimental(BaseExperimentalView):
-        def get(self, request):
-            return render(request, 'Range/Woods/WoodsExperimental.html', {'form': form,
-                                                                'shots': shots})'''
 
-class WoodsExperimental(View):
+class Base_Drill_View(View):
     def get(self, request):
-        form = Woods_Experimental_Form()
-        shots = Woods_Experimental.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Woods/WoodsExperimental.html', {'form': form,
-                                                                'shots': shots})
+        path = request.path
+        newpath = path.split('/')
+        formname = newpath[1] + '_' + newpath[2] + '_Form'
+        form = forms[formname]
+        modelname = newpath[1] + '_' + newpath[2]
+        shots = models[modelname]
+        url = 'Range/'+ newpath[1] + '/' + newpath[1] + newpath[2] + '.html'
+        return render(request, url, {'form': form, 'shots': shots})
+
+
+class WoodsExperimental(Base_Drill_View):
 
     def post(self, request):
         dataform = Woods_Experimental_Form(request.POST)
@@ -57,14 +54,25 @@ class WoodsExperimental(View):
         form = Woods_Experimental_Form()
         shots = Woods_Experimental.objects.all().order_by('-date', '-pk')
         return render(request, 'Range/Woods/WoodsExperimental.html', {'form': form,
-                                                                'shots': shots})
+                                                                 'shots': shots})
+
+
+'''class WoodsExperimental(View):
+    def get(self, request):
+        path = request.path
+        newpath = path.split('/')
+        formname = newpath[1] + '_' + newpath[2] + '_Form'
+        form = forms[formname]
+        modelname = newpath[1] + '_' + newpath[2]
+        print(modelname)
+        shots = models[modelname]
+        #shots = model.objects.all().order_by('-date', '-pk')
+        return render(request, 'Range/Woods/WoodsExperimental.html', {'form': form,
+                                                                'shots': shots})'''
+
 
 class WoodsTest(View):
-    def get(self, request):
-        form = Woods_Test_Form()
-        return render(request, 'Range/Woods/WoodsTest.html', {'form':form,
-                                                        'range':range(3)
-                                                        })
+    pass
 
 class WoodsTechnical(View):
     def get(self, request):
@@ -154,7 +162,7 @@ class IronsTechnical(View):
         return render(request, 'Range/Irons/IronsTechnical.html', {'form': form,
                                                                    'shots': shots})
 
-class IronsExperimental(View):        
+class IronsExperimental(View):
     def get(self, request):
         form = Irons_Experimental_Form()
         shots = Irons_Experimental.objects.all().order_by('-date', '-pk')
