@@ -21,7 +21,7 @@
        <p class="gb1">Area: {{ form.area }}</p>
        <p class="gb1">Detail: {{ form.detail }}</p>
        <p class="gb1">Level: {{ form.level }}</p>
-       <p class="gb1">Club: {{ form.club }}</p>
+       {% block club %}<p class="gb1">Club: {{ form.club }}</p>{% endblock %}
 
        <button class="gb1" type="button" onclick="attempt()">Shot Miss</button>
        <button class="gb1" type="button" onclick="make()">Shot Success</button><br>
@@ -37,23 +37,6 @@
 
 {% block drills %}
 
-<script>
-  function showcenterstrike() {
-    document.getElementById('centerstrike').style.display="block";
-    document.getElementById('clubpath').style.display="none";
-    document.getElementById('divotlocation').style.display="none";
-  }
-  function showclubpath() {
-    document.getElementById('centerstrike').style.display="none";
-    document.getElementById('clubpath').style.display="block";
-    document.getElementById('divotlocation').style.display="none";
-  }
-  function showdivotlocation() {
-    document.getElementById('centerstrike').style.display="none";
-    document.getElementById('clubpath').style.display="none";
-    document.getElementById('divotlocation').style.display="block";
-  }
-</script>
 
 <div id='drillrow'>
   <input type="radio" name="data" onclick="showcenterstrike()" id="buttonclub" checked="checked">{% block buttonclub1 %}Center Hit{% endblock %}

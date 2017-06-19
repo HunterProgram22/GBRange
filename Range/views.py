@@ -2,11 +2,13 @@ from django.shortcuts import render
 from django.views import View
 from .models import Woods_Technical, Hybrids_Technical, Irons_Technical, \
     Wedges_Technical, Chipping_Technical, Putting_Technical, Woods_Experimental, \
-    Wedges_Experimental, Putting_Experimental
+    Wedges_Experimental, Putting_Experimental, Irons_Experimental, \
+    Hybrids_Experimental, Chipping_Experimental
 from .forms import Woods_Test_Form, Woods_Technical_Form, Hybrids_Technical_Form, \
     Irons_Technical_Form, Wedges_Technical_Form, Chipping_Technical_Form, \
     Putting_Technical_Form, Woods_Experimental_Form, Wedges_Experimental_Form, \
-    Putting_Experimental_Form
+    Putting_Experimental_Form, Irons_Experimental_Form, Hybrids_Experimental_Form, \
+    Chipping_Experimental_Form
 
 
 
@@ -26,6 +28,20 @@ class WoodsPerformance(View):
 
 class WoodsGames(View):
     pass
+
+'''Use class based views that inherit and that use the request name of the page (i.e.
+woods and append it to 'experimental form' or whatever else is needed - BOOM!'''
+'''class BaseExperimentalView(View):
+    def get(self, request):
+        formname = 'request' + '_Experimental_Form()'
+        form = formname
+        shotsname = 'request' + '_Experimental.objects.all().order_by('-date', '-pk')'
+        shots = shotsname /this and form above line may be unecessary
+        
+    class WoodsExperimental(BaseExperimentalView):
+        def get(self, request):
+            return render(request, 'Range/Woods/WoodsExperimental.html', {'form': form,
+                                                                'shots': shots})'''
 
 class WoodsExperimental(View):
     def get(self, request):
@@ -75,7 +91,20 @@ class HybridsTest(View):
     pass
 
 class HybridsExperimental(View):
-    pass
+    def get(self, request):
+        form = Hybrids_Experimental_Form()
+        shots = Hybrids_Experimental.objects.all().order_by('-date', '-pk')
+        return render(request, 'Range/Hybrids/HybridsExperimental.html', {'form': form,
+                                                                'shots': shots})
+
+    def post(self, request):
+        dataform = Hybrids_Experimental_Form(request.POST)
+        if dataform.is_valid():
+            dataform.save()
+        form = Hybrids_Experimental_Form()
+        shots = Hybrids_Experimental.objects.all().order_by('-date', '-pk')
+        return render(request, 'Range/Hybrids/HybridsExperimental.html', {'form': form,
+                                                                'shots': shots})
 
 class HybridsCalibration(View):
     pass
@@ -109,18 +138,6 @@ class Irons(View):
 class IronsTest(View):
     pass
 
-class IronsExperimental(View):
-    pass
-
-class IronsCalibration(View):
-    pass
-
-class IronsPerformance(View):
-    pass
-
-class IronsGames(View):
-    pass
-
 class IronsTechnical(View):
     def get(self, request):
         form = Irons_Technical_Form()
@@ -135,7 +152,33 @@ class IronsTechnical(View):
         form = Irons_Technical_Form()
         shots = Irons_Technical.objects.all().order_by('-date', '-pk')
         return render(request, 'Range/Irons/IronsTechnical.html', {'form': form,
-                                                             'shots': shots})
+                                                                   'shots': shots})
+
+class IronsExperimental(View):        
+    def get(self, request):
+        form = Irons_Experimental_Form()
+        shots = Irons_Experimental.objects.all().order_by('-date', '-pk')
+        return render(request, 'Range/Irons/IronsExperimental.html', {'form': form,
+                                                                      'shots': shots})
+
+    def post(self, request):
+        dataform = Irons_Experimental_Form(request.POST)
+        if dataform.is_valid():
+            dataform.save()
+        form = Irons_Experimental_Form()
+        shots = Irons_Experimental.objects.all().order_by('-date', '-pk')
+        return render(request, 'Range/Irons/IronsExperimental.html', {'form': form,
+                                                                      'shots': shots})
+
+class IronsCalibration(View):
+    pass
+
+class IronsPerformance(View):
+    pass
+
+class IronsGames(View):
+    pass
+
 
 class Wedges(View):
     def get(self, request):
@@ -194,7 +237,20 @@ class ChippingTest(View):
     pass
 
 class ChippingExperimental(View):
-    pass
+ def get(self, request):
+        form = Chipping_Experimental_Form()
+        shots = Chipping_Experimental.objects.all().order_by('-date', '-pk')
+        return render(request, 'Range/Chipping/ChippingExperimental.html', {'form': form,
+                                                                 'shots': shots})
+
+def post(self, request):
+        dataform = Chipping_Experimental_Form(request.POST)
+        if dataform.is_valid():
+            dataform.save()
+        form = Chipping_Experimental_Form()
+        shots = Chipping_Experimental.objects.all().order_by('-date', '-pk')
+        return render(request, 'Range/Chipping/ChippingExperimental.html', {'form': form,
+                                                                 'shots': shots})
 
 class ChippingCalibration(View):
     pass

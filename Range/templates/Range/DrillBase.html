@@ -52,12 +52,31 @@
 {% block drills %}Drills{% endblock %}
 
 {% block drillhistory %}Drill History{% endblock %}
+
 <script>
   var today = new Date();
   var stringmonth = 1 + today.getMonth();
   var stringdate = stringmonth + '/' + today.getDate() + '/' +
     today.getFullYear();
     document.getElementById('id_date').value = stringdate;
+    
+  function showcenterstrike() {
+    document.getElementById('centerstrike').style.display="block";
+    document.getElementById('clubpath').style.display="none";
+    document.getElementById('divotlocation').style.display="none";
+  }
+  function showclubpath() {
+    document.getElementById('centerstrike').style.display="none";
+    document.getElementById('clubpath').style.display="block";
+    document.getElementById('divotlocation').style.display="none";
+  }
+  function showdivotlocation() {
+    document.getElementById('centerstrike').style.display="none";
+    document.getElementById('clubpath').style.display="none";
+    document.getElementById('divotlocation').style.display="block";
+  }
+
   {% block script %} {% endblock %}
 </script>
+
 </body>

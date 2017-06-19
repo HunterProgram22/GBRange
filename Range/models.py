@@ -101,6 +101,7 @@ THIN_FAT = 'TFH'
 WEAK_STRONG = 'WSG'
 THREE_INCH = '3IH'
 TWO_INCH = '2IH'
+RIGHT_ARM = 'RAC'
 
 class Experimental_Drills(models.Model):
     date = models.DateField()
@@ -130,6 +131,14 @@ class Woods_Technical(Technical_Drills, Wood_Clubs):
 
 
 # Hybrids Models
+class Hybrids_Experimental(Experimental_Drills, Hybrid_Clubs):
+    DRILL_CHOICES = (
+                (HEEL_TOE, 'Heel and Toe Hits'),
+                (THIN_FAT, 'High and Low Face Hits'),
+                (WEAK_STRONG, 'Weak and Strong Grip'),
+    )
+    drill = models.CharField(max_length=50, choices=DRILL_CHOICES)
+
 class Hybrids_Technical(Technical_Drills, Hybrid_Clubs):
     TECH_CHOICES = (
                 (CENTER_STRIKE, 'Center Face Hit'),
@@ -147,6 +156,14 @@ class Irons_Technical(Technical_Drills, Iron_Clubs):
                 (CLUB_FACE_PATH, 'Club Face and Path'),
             )
     area = models.CharField(max_length=50, choices=TECH_CHOICES)
+    
+class Irons_Experimental(Experimental_Drills, Iron_Clubs):
+    DRILL_CHOICES = (
+                (HEEL_TOE, 'Heel and Toe Hits'),
+                (THIN_FAT, 'High and Low Face Hits'),
+                (WEAK_STRONG, 'Weak and Strong Grip'),
+    )
+    drill = models.CharField(max_length=50, choices=DRILL_CHOICES)
 
 
 # Wedge Models
@@ -169,6 +186,12 @@ class Wedges_Experimental(Experimental_Drills, Wedge_Clubs):
 
 
 # Chipping Models
+class Chipping_Experimental(Experimental_Drills, Chipping_Clubs):
+    DRILL_CHOICES = (
+                (RIGHT_ARM, 'One Arm Chip'),
+    )
+    drill = models.CharField(max_length=50, choices=DRILL_CHOICES)
+
 class Chipping_Technical(Technical_Drills, Chipping_Clubs):
     TECH_CHOICES = (
                 (CENTER_STRIKE, 'Center Face Hit'),
