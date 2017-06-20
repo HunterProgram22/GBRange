@@ -52,17 +52,19 @@
   <table width="100%" style="border: 3px solid black;">
     <tr style="border: 1px solid black;">
       <th>Date</th>
-      <th>Area</th>
+      {% block drill_table_header1 %}<th>Area</th>{% endblock %}
+      <th>Drill</th>
       <th>Detail</th>
-      <th>Club</th>
+      {% block drill_table_header2 %}<th>Club</th>{% endblock %}
       <th>Shots Hit</th>
     </tr>
     {% for shot in shots %}
     <tr>
         <td>{{ shot.date }}</td>
-        <td>{{ shot.area }}</td>
+        {% block drill_table_row1 %}<td>{{ shot.area }}</td>{% endblock %}
+        <td>{{ shot.drill }}</td>
         <td>{{ shot.detail }}</td>
-        <td>{{ shot.club }}</td>
+        {% block drill_table_row2 %}<td>{{ shot.club }}</td>{% endblock %}
         <td>{{ shot.shots_hit }}</td>
       </tr>
       {% endfor %}
