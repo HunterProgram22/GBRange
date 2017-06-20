@@ -1,23 +1,37 @@
 from django.shortcuts import render
 from django.views import View
 from django.apps import apps
-from .models import Woods_Technical, Hybrids_Technical, Irons_Technical, \
-    Wedges_Technical, Chipping_Technical, Putting_Technical, Woods_Experimental, \
-    Wedges_Experimental, Putting_Experimental, Irons_Experimental, \
-    Hybrids_Experimental, Chipping_Experimental
-from .forms import Woods_Test_Form, Woods_Technical_Form, Hybrids_Technical_Form, \
-    Irons_Technical_Form, Wedges_Technical_Form, Chipping_Technical_Form, \
-    Putting_Technical_Form, Woods_Experimental_Form, Wedges_Experimental_Form, \
-    Putting_Experimental_Form, Irons_Experimental_Form, Hybrids_Experimental_Form, \
-    Chipping_Experimental_Form
-
-forms = {'Woods_Experimental_Form':Woods_Experimental_Form()}
-forms2 = {'Woods_Experimental_Form':Woods_Experimental_Form}
-models = {'Woods_Experimental':Woods_Experimental.objects.all().order_by('-date', '-pk')}
+from .dictionaries import form_names_dict, model_names_dict
 
 class Main(View):
     def get(self, request):
         return render(request, 'Range/MainMenu.html', {})
+
+class Base_Drill_View(View):
+
+    def get(self, request):
+        path = request.path.split('/')
+        form_name = path[1] + '_' + path[2] + '_Form'
+        model_name = path[1] + '_' + path[2]
+        form = form_names_dict[form_name]
+        shots = self.shots_call(model_names_dict[model_name])
+        url = 'Range/'+ path[1] + '/' + path[1] + path[2] + '.html'
+        return render(request, url, {'form': form, 'shots': shots})
+
+    def post(self, request):
+        path = request.path.split('/')
+        form_name = path[1] + '_' + path[2] + '_Form'
+        model_name = path[1] + '_' + path[2]
+        form = form_names_dict[form_name]
+        dataform = form(request.POST)
+        if dataform.is_valid():
+            dataform.save()
+        shots = self.shots_call(model_names_dict[model_name])
+        url = 'Range/'+ path[1] + '/' + path[1] + path[2] + '.html'
+        return render(request, url, {'form': form, 'shots': shots})
+
+    def shots_call(self, model_name):
+        return model_name.objects.all().order_by('-date', '-pk')
 
 class Woods(View):
     def get(self, request):
@@ -32,63 +46,16 @@ class WoodsPerformance(View):
 class WoodsGames(View):
     pass
 
-
-class Base_Drill_View(View):
-    def get(self, request):
-        path = request.path
-        newpath = path.split('/')
-        formname = newpath[1] + '_' + newpath[2] + '_Form'
-        form = forms[formname]
-        modelname = newpath[1] + '_' + newpath[2]
-        shots = models[modelname]
-        url = 'Range/'+ newpath[1] + '/' + newpath[1] + newpath[2] + '.html'
-        return render(request, url, {'form': form, 'shots': shots})
-
-
 class WoodsExperimental(Base_Drill_View):
-
-    def post(self, request):
-        dataform = Woods_Experimental_Form(request.POST)
-        if dataform.is_valid():
-            dataform.save()
-        form = Woods_Experimental_Form()
-        shots = Woods_Experimental.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Woods/WoodsExperimental.html', {'form': form,
-                                                                 'shots': shots})
-
-
-'''class WoodsExperimental(View):
-    def get(self, request):
-        path = request.path
-        newpath = path.split('/')
-        formname = newpath[1] + '_' + newpath[2] + '_Form'
-        form = forms[formname]
-        modelname = newpath[1] + '_' + newpath[2]
-        print(modelname)
-        shots = models[modelname]
-        #shots = model.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Woods/WoodsExperimental.html', {'form': form,
-                                                                'shots': shots})'''
-
+    def __str__ (self):
+        return None
 
 class WoodsTest(View):
     pass
 
-class WoodsTechnical(View):
-    def get(self, request):
-        form = Woods_Technical_Form()
-        shots = Woods_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Woods/WoodsTechnical.html', {'form': form,
-                                                             'shots': shots})
-
-    def post(self, request):
-        dataform = Woods_Technical_Form(request.POST)
-        if dataform.is_valid():
-            dataform.save()
-        form = Woods_Technical_Form()
-        shots = Woods_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Woods/WoodsTechnical.html', {'form': form,
-                                                             'shots': shots})
+class WoodsTechnical(Base_Drill_View):
+    def __str__ (self):
+        return None
 
 
 class Hybrids(View):
@@ -98,21 +65,9 @@ class Hybrids(View):
 class HybridsTest(View):
     pass
 
-class HybridsExperimental(View):
-    def get(self, request):
-        form = Hybrids_Experimental_Form()
-        shots = Hybrids_Experimental.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Hybrids/HybridsExperimental.html', {'form': form,
-                                                                'shots': shots})
-
-    def post(self, request):
-        dataform = Hybrids_Experimental_Form(request.POST)
-        if dataform.is_valid():
-            dataform.save()
-        form = Hybrids_Experimental_Form()
-        shots = Hybrids_Experimental.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Hybrids/HybridsExperimental.html', {'form': form,
-                                                                'shots': shots})
+class HybridsExperimental(Base_Drill_View):
+    def __str__ (self):
+        return None
 
 class HybridsCalibration(View):
     pass
@@ -123,21 +78,9 @@ class HybridsPerformance(View):
 class HybridsGames(View):
     pass
 
-class HybridsTechnical(View):
-    def get(self, request):
-        form = Hybrids_Technical_Form()
-        shots = Hybrids_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Hybrids/HybridsTechnical.html', {'form': form,
-                                                               'shots': shots})
-
-    def post(self, request):
-        dataform = Hybrids_Technical_Form(request.POST)
-        if dataform.is_valid():
-            dataform.save()
-        form = Hybrids_Technical_Form()
-        shots = Hybrids_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Hybrids/HybridsTechnical.html', {'form': form,
-                                                               'shots': shots})
+class HybridsTechnical(Base_Drill_View):
+    def __str__ (self):
+        return None
 
 class Irons(View):
     def get(self, request):
@@ -146,37 +89,13 @@ class Irons(View):
 class IronsTest(View):
     pass
 
-class IronsTechnical(View):
-    def get(self, request):
-        form = Irons_Technical_Form()
-        shots = Irons_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Irons/IronsTechnical.html', {'form': form,
-                                                             'shots': shots})
+class IronsTechnical(Base_Drill_View):
+    def __str__ (self):
+        return None
 
-    def post(self, request):
-        dataform = Irons_Technical_Form(request.POST)
-        if dataform.is_valid():
-            dataform.save()
-        form = Irons_Technical_Form()
-        shots = Irons_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Irons/IronsTechnical.html', {'form': form,
-                                                                   'shots': shots})
-
-class IronsExperimental(View):
-    def get(self, request):
-        form = Irons_Experimental_Form()
-        shots = Irons_Experimental.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Irons/IronsExperimental.html', {'form': form,
-                                                                      'shots': shots})
-
-    def post(self, request):
-        dataform = Irons_Experimental_Form(request.POST)
-        if dataform.is_valid():
-            dataform.save()
-        form = Irons_Experimental_Form()
-        shots = Irons_Experimental.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Irons/IronsExperimental.html', {'form': form,
-                                                                      'shots': shots})
+class IronsExperimental(Base_Drill_View):
+    def __str__ (self):
+        return None
 
 class IronsCalibration(View):
     pass
@@ -186,7 +105,6 @@ class IronsPerformance(View):
 
 class IronsGames(View):
     pass
-
 
 class Wedges(View):
     def get(self, request):
@@ -204,38 +122,13 @@ class WedgesPerformance(View):
 class WedgesGames(View):
     pass
 
-class WedgesTechnical(View):
-    def get(self, request):
-        form = Wedges_Technical_Form()
-        shots = Wedges_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Wedges/WedgesTechnical.html', {'form': form,
-                                                              'shots': shots})
+class WedgesTechnical(Base_Drill_View):
+    def __str__ (self):
+        return None
 
-    def post(self, request):
-        dataform = Wedges_Technical_Form(request.POST)
-        if dataform.is_valid():
-            dataform.save()
-        form = Wedges_Technical_Form()
-        shots = Wedges_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Wedges/WedgesTechnical.html', {'form': form,
-                                                              'shots': shots})
-
-class WedgesExperimental(View):
-    def get(self, request):
-        form = Wedges_Experimental_Form()
-        shots = Wedges_Experimental.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Wedges/WedgesExperimental.html', {'form': form,
-                                                                 'shots': shots})
-
-    def post(self, request):
-        dataform = Wedges_Experimental_Form(request.POST)
-        if dataform.is_valid():
-            dataform.save()
-        form = Wedges_Experimental_Form()
-        shots = Wedges_Experimental.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Wedges/WedgesExperimental.html', {'form': form,
-                                                                 'shots': shots})
-
+class WedgesExperimental(Base_Drill_View):
+    def __str__ (self):
+        return None
 
 class Chipping(View):
     def get(self, request):
@@ -244,21 +137,9 @@ class Chipping(View):
 class ChippingTest(View):
     pass
 
-class ChippingExperimental(View):
- def get(self, request):
-        form = Chipping_Experimental_Form()
-        shots = Chipping_Experimental.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Chipping/ChippingExperimental.html', {'form': form,
-                                                                 'shots': shots})
-
-def post(self, request):
-        dataform = Chipping_Experimental_Form(request.POST)
-        if dataform.is_valid():
-            dataform.save()
-        form = Chipping_Experimental_Form()
-        shots = Chipping_Experimental.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Chipping/ChippingExperimental.html', {'form': form,
-                                                                 'shots': shots})
+class ChippingExperimental(Base_Drill_View):
+    def __str__ (self):
+        return None
 
 class ChippingCalibration(View):
     pass
@@ -269,21 +150,9 @@ class ChippingPerformance(View):
 class ChippingGames(View):
     pass
 
-class ChippingTechnical(View):
-    def get(self, request):
-        form = Chipping_Technical_Form()
-        shots = Chipping_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Chipping/ChippingTechnical.html', {'form': form,
-                                                                'shots': shots})
-
-    def post(self, request):
-        dataform = Chipping_Technical_Form(request.POST)
-        if dataform.is_valid():
-            dataform.save()
-        form = Chipping_Technical_Form()
-        shots = Chipping_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Chipping/ChippingTechnical.html', {'form': form,
-                                                                'shots': shots})
+class ChippingTechnical(Base_Drill_View):
+    def __str__ (self):
+        return None
 
 class Putting(View):
     def get(self, request):
@@ -301,34 +170,10 @@ class PuttingPerformance(View):
 class PuttingGames(View):
     pass
 
-class PuttingTechnical(View):
-    def get(self, request):
-        form = Putting_Technical_Form()
-        shots = Putting_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Putting/PuttingTechnical.html', {'form': form,
-                                                               'shots': shots})
+class PuttingTechnical(Base_Drill_View):
+    def __str__ (self):
+        return None
 
-    def post(self, request):
-        dataform = Putting_Technical_Form(request.POST)
-        if dataform.is_valid():
-            dataform.save()
-        form = Putting_Technical_Form()
-        shots = Putting_Technical.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Putting/PuttingTechnical.html', {'form': form,
-                                                               'shots': shots})
-
-class PuttingExperimental(View):
-    def get(self, request):
-        form = Putting_Experimental_Form()
-        shots = Putting_Experimental.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Putting/PuttingExperimental.html', {'form': form,
-                                                                  'shots': shots})
-
-    def post(self, request):
-        dataform = Putting_Experimental_Form(request.POST)
-        if dataform.is_valid():
-            dataform.save()
-        form = Putting_Experimental_Form()
-        shots = Putting_Experimental.objects.all().order_by('-date', '-pk')
-        return render(request, 'Range/Putting/PuttingExperimental.html', {'form': form,
-                                                                  'shots': shots})
+class PuttingExperimental(Base_Drill_View):
+    def __str__ (self):
+        return None

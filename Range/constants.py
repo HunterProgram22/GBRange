@@ -1,4 +1,3 @@
-
 # Clubs
 D1 = "Driver"
 D3 = "3 Wood"

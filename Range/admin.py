@@ -1,10 +1,11 @@
 from django.contrib import admin
 from .models import Woods_Test, Woods_Technical, \
     Hybrids_Technical, Irons_Technical, Wedges_Technical, Chipping_Technical, \
-    Putting_Technical
+    Putting_Technical, Woods_Experimental
 
 admin.site.register(Woods_Test)
 admin.site.register(Woods_Technical)
+admin.site.register(Woods_Experimental)
 admin.site.register(Hybrids_Technical)
 admin.site.register(Irons_Technical)
 admin.site.register(Wedges_Technical)
