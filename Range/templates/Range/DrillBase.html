@@ -47,11 +47,75 @@
 
 <h2>{% block pageheader %}Page Header{% endblock %}</h2>
 
-{% block formbox %}Form Box{% endblock %}
+{% block formbox %}
+<script>
+    var attempts = 0;
+    var makes = 0;
+    function attempt() {
+      attempts += 1;
+      document.getElementById("id_shots_hit").value = attempts;
+    };
+    function make() {
+      attempts += 1;
+      makes += 1;
+      document.getElementById("id_shots_hit").value = attempts;
+      document.getElementById("id_shots_success").value = makes;
+    };
+</script>
+<div id='formbox'>
+   <form method="POST">{% csrf_token %}
+       <p class="gb1">Area: {{ form.area }}</p>
+       <p class="gb1">Phase: {{ form.phase }}</p>
+       <p class="gb1">Date: {{ form.date }}</p>
+       <p class="gb1">Detail: {{ form.detail }}</p>
+       <p class="gb1">Level: {{ form.level }}</p>
+       <p class="gb1">Club: {{ form.club }}</p>
+       <p class="gb1">Drill: {{ form.drill }}</p>
+
+       <button class="gb1" type="button" onclick="attempt()">Shot Miss</button>
+       <button class="gb1" type="button" onclick="make()">Shot Success</button><br>
+
+       <p class="gb1">Shots Hit: {{ form.shots_hit }}</p>
+       <p class="gb1">Shots Success: {{ form.shots_success }}</p>
+
+
+      <button class="gb1" type="submit" class="save btn btn-default">Submit</button>
+  </form>
+</div>
+{% endblock %}
 
 {% block drills %}Drills{% endblock %}
 
-{% block drillhistory %}Drill History{% endblock %}
+{% block drillhistory %}
+<div id="techsheet">
+  <table width="100%" style="border: 3px solid black;">
+    <tr style="border: 1px solid black;">
+      <th>Area</th>
+      <th>Phase</th>
+      <th>Date</th>
+      <th>Detail</th>
+      <th>Level</th>
+      <th>Club</th>
+      <th>Drill</th>
+      <th>Shots Hit</th>
+      <th>Shots Success</th>
+    </tr>
+    {% for shot in shots %}
+    <tr>
+        <td>{{ shot.area }}</td>
+        <td>{{ shot.phase }}</td>
+        <td>{{ shot.date }}</td>
+        <td>{{ shot.detail }}</td>
+        <td>{{ shot.level }}</td>
+        <td>{{ shot.club }}</td>
+        <td>{{ shot.drill }}</td>
+        <td>{{ shot.shots_hit }}</td>
+        <td>{{ shot.shots_success }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock %}
 
 <script>
   var today = new Date();
@@ -59,7 +123,7 @@
   var stringdate = stringmonth + '/' + today.getDate() + '/' +
     today.getFullYear();
     document.getElementById('id_date').value = stringdate;
-    
+
   function showcenterstrike() {
     document.getElementById('centerstrike').style.display="block";
     document.getElementById('clubpath').style.display="none";
