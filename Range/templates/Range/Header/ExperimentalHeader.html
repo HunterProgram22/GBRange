@@ -1,20 +1,7 @@
 {% extends 'Range/DrillBase.html' %}
 
-{% block formbox %}
-<div id='formbox'>
-   <form method="POST">{% csrf_token %}
-       <p class="gb1">Date: {{ form.date }}</p>
-       <p class="gb1">Drill: {{ form.drill }}</p>
-       <p class="gb1">Detail: {{ form.detail }}</p>
-       {% block club %}<p class="gb1">Club: {{ form.club }}</p>{% endblock %}
-       <p class="gb1">Shots Hit: {{ form.shots_hit }}</p>
-      <button class="gb1" type="submit" class="save btn btn-default">Submit</button>
-  </form>
-</div>
-{% endblock %}
-
-
 {% block drills %}
+
 <div id='drillrow'>
   <input type="radio" name="data" onclick="showcenterstrike()" id="buttonclub" checked="checked">{% block buttonclub1 %}Center Hit{% endblock %}
   <input type="radio" name="data" onclick="showclubpath()" id="buttonclub">{% block buttonclub2 %}Club Path{% endblock %}
@@ -44,30 +31,5 @@
         <li>{% block drill3-2 %}{% endblock %} </li>
         <li>{% block drill3-3 %}{% endblock %} </li>
     </ul>
-  </div>
-{% endblock %}
-
-{% block drillhistory %}
-<div id="techsheet">
-  <table width="100%" style="border: 3px solid black;">
-    <tr style="border: 1px solid black;">
-      <th>Date</th>
-      {% block drill_table_header1 %}<th>Area</th>{% endblock %}
-      <th>Drill</th>
-      <th>Detail</th>
-      {% block drill_table_header2 %}<th>Club</th>{% endblock %}
-      <th>Shots Hit</th>
-    </tr>
-    {% for shot in shots %}
-    <tr>
-        <td>{{ shot.date }}</td>
-        {% block drill_table_row1 %}<td>{{ shot.area }}</td>{% endblock %}
-        <td>{{ shot.drill }}</td>
-        <td>{{ shot.detail }}</td>
-        {% block drill_table_row2 %}<td>{{ shot.club }}</td>{% endblock %}
-        <td>{{ shot.shots_hit }}</td>
-      </tr>
-      {% endfor %}
-    </table>
   </div>
 {% endblock %}
