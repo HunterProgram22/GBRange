@@ -22,6 +22,8 @@
        <p class="gb1">Detail: {{ form.detail }}</p>
        <p class="gb1">Level: {{ form.level }}</p>
        {% block club %}<p class="gb1">Club: {{ form.club }}</p>{% endblock %}
+       <p class="gb1">Drill: {{ form.drill }}</p>
+       <p class="gb1">Phase: {{ form.phase }}</p>
 
        <button class="gb1" type="button" onclick="attempt()">Shot Miss</button>
        <button class="gb1" type="button" onclick="make()">Shot Success</button><br>
@@ -82,6 +84,8 @@
       <th>Detail</th>
       <th>Level</th>
       <th>Club</th>
+      <th>Drill</th>
+      <th>Phase</th>
       <th>Shots Hit</th>
       <th>Shots Success</th>
     </tr>
@@ -92,6 +96,8 @@
         <td>{{ shot.detail }}</td>
         <td>{{ shot.level }}</td>
         <td>{{ shot.club }}</td>
+        <td>{{ shot.drill }}</td>
+        <td>{{ shot.phase }}</td>
         <td>{{ shot.shots_hit }}</td>
         <td>{{ shot.shots_success }}</td>
       </tr>

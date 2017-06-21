@@ -1,3 +1,21 @@
+# Phases
+TE = "Testing"
+DT = "Direct Technical"
+EX = "Experimental"
+CL = "Calibration"
+PF = "Performance"
+RG = "Routine and Games"
+
+PHASES = (
+    (TE, "Testing"),
+    (DT, "Direct Technical"),
+    (EX, "Experimental"),
+    (CL, "Calibration"),
+    (PF, "Performance"),
+    (RG, "Routine and Games"),
+    
+    )
+
 # Clubs
 D1 = "Driver"
 D3 = "3 Wood"
@@ -12,6 +30,21 @@ GW = "Gap Wedge 50"
 SW = "Sand Wedge 54"
 LW = "Lob Wedge 58"
 PT = "Putter"
+
+ALL_CLUBS = (
+        (D1, 'Driver'),
+        (D3, 'Three Wood'),
+        (H3, '3 Hybrid'),
+        (I5, '5 Iron'),
+        (I6, '6 Iron'),
+        (I7, '7 Iron'),
+        (I8, '8 Iron'),
+        (I9, '9 Iron'),
+        (PW, 'Pitching Wedge 45'),
+        (GW, 'Gap Wedge 50'),
+        (SW, 'Sand Wedge 54'),
+        (LW, 'Lob Wedge 58'),
+    )
 
 WOOD_CLUBS = (
         (D1, 'Driver'),
