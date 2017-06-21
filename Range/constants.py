@@ -13,7 +13,23 @@ PHASES = (
     (CL, "Calibration"),
     (PF, "Performance"),
     (RG, "Routine and Games"),
-    
+    )
+
+# Areas
+WD = "Woods"
+HY = "Hybrids"
+IR = "Irons"
+WE = "Wedges"
+CH = "Chipping"
+PT = "Putting"
+
+AREAS = (
+    (WD, "Woods"),
+    (HY, "Hybrids"),
+    (IR, "Irons"),
+    (WE, "Wedges"),
+    (CH, "Chipping"),
+    (PT, "Putting"),
     )
 
 # Clubs
@@ -44,6 +60,7 @@ ALL_CLUBS = (
         (GW, 'Gap Wedge 50'),
         (SW, 'Sand Wedge 54'),
         (LW, 'Lob Wedge 58'),
+        (PT, 'Putter'),
     )
 
 WOOD_CLUBS = (

@@ -1,97 +1,171 @@
 from django import forms
 from .models import Drill_Base_Model
-from .constants import PHASES
+from .constants import PHASES, WOOD_CLUBS, HYBRID_CLUBS, \
+    IRON_CLUBS, WEDGE_CLUBS, CHIPPING_CLUBS
 
 
 class Woods_Experimental_Form(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['phase'].initial = 'Experimental'
+        self.fields['area'].initial = 'Woods'
+        self.fields['club'].choices = WOOD_CLUBS
+
     class Meta:
         model = Drill_Base_Model
-        fields = ('date', 'phase', 'drill', 'detail', 'club', 'shots_hit')
-
-class Woods_Test_Form(forms.ModelForm):
-    pass
+        exclude = ['shots_success', 'level']
 
 class Woods_Technical_Form(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['phase'].initial = 'Direct Technical'
+        self.fields['area'].initial = 'Woods'
+        self.fields['club'].choices = WOOD_CLUBS
 
     class Meta:
         model = Drill_Base_Model
-        fields = ('date', 'area', 'phase', 'detail', 'level', 'club', 'drill',
-                  'shots_hit', 'shots_success')
+        exclude = ['drill']
 
-'''        
 class Woods_Calibration_Form(forms.ModelForm):
-    
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['phase'].initial = 'Calibration'
+        self.fields['area'].initial = 'Woods'
+        self.fields['club'].choices = WOOD_CLUBS
+
     class Meta:
-        model = Woods_Calibration
-        fields = ('date', 'area', 'detail', 'level', 'club', 'shots_hit',
-        'shots_success')
+        model = Drill_Base_Model
+        exclude = ['shots_success', 'level']
+
+class Woods_Test_Form(forms.ModelForm):
+    pass
+
 
 class Hybrids_Experimental_Form(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['phase'].initial = 'Experimental'
+        self.fields['area'].initial = 'Hybrids'
+        self.fields['club'].choices = HYBRID_CLUBS
+
     class Meta:
-        model = Hybrids_Experimental
-        fields = ('date', 'drill', 'detail', 'club', 'shots_hit')
+        model = Drill_Base_Model
+        exclude = ['shots_success', 'level']
 
 class Hybrids_Technical_Form(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['phase'].initial = 'Direct Technical'
+        self.fields['area'].initial = 'Hybrids'
+        self.fields['club'].choices = HYBRID_CLUBS
+
     class Meta:
-        model = Hybrids_Technical
-        fields = ('date', 'area', 'detail', 'level', 'club', 'shots_hit',
-        'shots_success')
+        model = Drill_Base_Model
+        exclude = ['drill']
+
 
 class Irons_Technical_Form(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['phase'].initial = 'Direct Technical'
+        self.fields['area'].initial = 'Irons'
+        self.fields['club'].choices = IRON_CLUBS
+
     class Meta:
-        model = Irons_Technical
-        fields = ('date', 'area', 'detail', 'level', 'club', 'shots_hit',
-        'shots_success')
+        model = Drill_Base_Model
+        exclude = ['drill']
 
 class Irons_Experimental_Form(forms.ModelForm):
 
-    class Meta:
-        model = Irons_Experimental
-        fields = ('date', 'drill', 'detail', 'club', 'shots_hit')
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['phase'].initial = 'Experimental'
+            self.fields['area'].initial = 'Irons'
+            self.fields['club'].choices = IRON_CLUBS
+
+        class Meta:
+            model = Drill_Base_Model
+            exclude = ['shots_success', 'level']
+
 
 class Wedges_Technical_Form(forms.ModelForm):
 
-    class Meta:
-        model = Wedges_Technical
-        fields = ('date', 'area', 'detail', 'level', 'club', 'shots_hit',
-        'shots_success')
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['phase'].initial = 'DIrect Technical'
+            self.fields['area'].initial = 'Wedges'
+            self.fields['club'].choices = WEDGE_CLUBS
+
+        class Meta:
+            model = Drill_Base_Model
+            exclude = ['drill']
+
 
 class Wedges_Experimental_Form(forms.ModelForm):
 
-    class Meta:
-        model = Wedges_Experimental
-        fields = ('date', 'drill', 'detail', 'club', 'shots_hit')
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['phase'].initial = 'Experimental'
+            self.fields['area'].initial = 'Wedges'
+            self.fields['club'].choices = WEDGE_CLUBS
+
+        class Meta:
+            model = Drill_Base_Model
+            exclude = ['shots_success', 'level']
+
 
 class Chipping_Experimental_Form(forms.ModelForm):
 
-    class Meta:
-        model = Chipping_Experimental
-        fields = ('date', 'drill', 'detail', 'club', 'shots_hit')
+            def __init__(self, *args, **kwargs):
+                super().__init__(*args, **kwargs)
+                self.fields['phase'].initial = 'Experimental'
+                self.fields['area'].initial = 'Chipping'
+                self.fields['club'].choices = CHIPPING_CLUBS
+
+            class Meta:
+                model = Drill_Base_Model
+                exclude = ['shots_success', 'level']
 
 class Chipping_Technical_Form(forms.ModelForm):
 
-    class Meta:
-        model = Chipping_Technical
-        fields = ('date', 'area', 'detail', 'level', 'club', 'shots_hit',
-        'shots_success')
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['phase'].initial = 'Direct Technical'
+            self.fields['area'].initial = 'Chipping'
+            self.fields['club'].choices = CHIPPING_CLUBS
+
+        class Meta:
+            model = Drill_Base_Model
+            exclude = ['drill']
+
+
 
 class Putting_Technical_Form(forms.ModelForm):
 
-    class Meta:
-        model = Putting_Technical
-        fields = ('date', 'area', 'detail', 'level', 'shots_hit',
-        'shots_success')
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['phase'].initial = 'Direct Technical'
+            self.fields['area'].initial = 'Putting'
+            self.fields['club'].initial = 'Putter'
+
+        class Meta:
+            model = Drill_Base_Model
+            exclude = ['drill']
 
 class Putting_Experimental_Form(forms.ModelForm):
 
-    class Meta:
-        model = Putting_Experimental
-        fields = ('date', 'detail', 'drill', 'shots_hit')'''
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['phase'].initial = 'Experimental'
+            self.fields['area'].initial = 'Putting'
+            self.fields['club'].initial = 'Putter'
+
+        class Meta:
+            model = Drill_Base_Model
+            exclude = ['shots_success', 'level']

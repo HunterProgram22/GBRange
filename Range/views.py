@@ -32,9 +32,6 @@ class Base_Drill_View(View):
         url = 'Range/'+ path[1] + '/' + path[1] + path[2] + '.html'
         return render(request, url, {'form': form, 'shots': shots})
 
-    def shots_call(self, model_name):
-        return model_name.objects.all().order_by('-date', '-pk')
-
 
 class MenuView(View):
     def get(self, request):
