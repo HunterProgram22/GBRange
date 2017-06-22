@@ -3,6 +3,7 @@ from django.views import View
 from django.apps import apps
 from .models import Drill_Base_Model
 from .dictionaries import form_names_dict
+from .forms import Base_Drill_Form
 
 
 class Main(View):
@@ -15,7 +16,8 @@ class Base_Drill_View(View):
         path = request.path.split('/')
         form_name = path[1] + '_' + path[2] + '_Form'
         model_name = path[1] + '_' + path[2]
-        form = form_names_dict[form_name]
+        #form = form_names_dict[form_name]
+        form = Base_Drill_Form(path[1], path[2])
         shots = Drill_Base_Model.objects.all().order_by('-date', '-pk')
         url = 'Range/'+ path[1] + '/' + path[1] + path[2] + '.html'
         return render(request, url, {'form': form, 'shots': shots})

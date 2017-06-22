@@ -108,7 +108,7 @@ CHIPPING_DISTANCE = 'CD'
 SPEED = 'PS'
 PUTTING_LINE = 'PL'
 
-CENTERSTRIKE_TECH_AREAS = (
+DRILLS = (
         (CENTER_STRIKE, 'Center Face Hit'),
         (ANGLE_OF_ATTACK, 'Upward Angle of Attack'),
         (CLUB_FACE_PATH, 'Club Face and Path'),
@@ -123,8 +123,19 @@ THREE_INCH = '3IH'
 TWO_INCH = '2IH'
 RIGHT_ARM = 'RAC'
 
-CENTERSTRIKE_EXPERIMENTAL_DRILLS = (
+WOOD_EXPERIMENTAL_DRILLS = (
         (HEEL_TOE, 'Heel and Toe Hits'),
         (THIN_FAT, 'High and Low Face Hits'),
-        (WEAK_STRONG, 'Weak and Strong Grip'),
-        )
+        (WEAK_STRONG, 'Weak and Strong Grip'))
+
+
+'''WOOD_EXPERIMENTAL_DRILLS = (
+    'Wood', (
+        (HEEL_TOE, 'Heel and Toe Hits'),
+        (THIN_FAT, 'High and Low Face Hits'),
+        (WEAK_STRONG, 'Weak and Strong Grip'),),
+    'Putting', (
+        (WEAK_STRONG, 'Weak and Strong Putt'),
+        (TWO_INCH, 'Putts to 2-inch Hole'),
+        (THREE_INCH, 'Putts to 3-inch Hole'),),
+        )'''
