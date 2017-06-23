@@ -18,7 +18,7 @@ def get_initial_area(club):
         return 'Chipping'
     else:
         return 'Putting'
-    
+
 def get_initial_phase(area):
     if area == 'Test':
         return 'Test'
@@ -49,7 +49,7 @@ def get_club_choices(club):
 
 def get_drill_choices(area):
     if area == 'Test':
-        return None
+        return DRILLS
     elif area == 'Technical':
         return DRILLS
     elif area == 'Experimental':
@@ -60,7 +60,6 @@ def get_drill_choices(area):
         return DRILLS
     else:
         return DRILLS
-
 
 '''See the following link for information on initiating choices for form fields
 http://www.ilian.io/django-forms-choicefield-with-dynamic-values/'''
@@ -77,8 +76,8 @@ class Base_Drill_Form_GET(forms.ModelForm):
     class Meta:
         model = Drill_Base_Model
         fields = ('__all__')
-        
-        
+
+
 class Base_Drill_Form_POST(forms.ModelForm):
 
     class Meta:
