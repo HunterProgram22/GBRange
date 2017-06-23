@@ -95,6 +95,9 @@ CHIPPING_CLUBS = (
         (LW, 'Lob Wedge 58'),
         )
 
+PUTTING_CLUB = (
+        (PT, 'Putter'),
+        )
 
 # Technical Skill Areas
 CENTER_STRIKE = 'CS'
