@@ -19,16 +19,16 @@ def get_initial_area(club):
     else:
         return 'Putting'
 
-def get_initial_phase(area):
-    if area == 'Test':
+def get_initial_phase(phase):
+    if phase == 'Test':
         return 'Test'
-    elif area == 'Technical':
+    elif phase == 'Technical':
         return 'Direct Technical'
-    elif area == 'Experimental':
+    elif phase == 'Experimental':
         return 'Experimental'
-    elif area == 'Calibration':
+    elif phase == 'Calibration':
         return 'Calibration'
-    elif area == 'Performance':
+    elif phase == 'Performance':
         return 'Performance'
     else:
         return 'Games'
@@ -47,16 +47,16 @@ def get_club_choices(club):
     else:
         return PUTTING_CLUB
 
-def get_drill_choices(area):
-    if area == 'Test':
+def get_drill_choices(phase):
+    if phase == 'Test':
         return DRILLS
-    elif area == 'Technical':
+    elif phase == 'Technical':
         return DRILLS
-    elif area == 'Experimental':
+    elif phase == 'Experimental':
         return DRILLS
-    elif area == 'Calibration':
+    elif phase == 'Calibration':
         return DRILLS
-    elif area == 'Performance':
+    elif phase == 'Performance':
         return DRILLS
     else:
         return DRILLS
@@ -66,11 +66,11 @@ http://www.ilian.io/django-forms-choicefield-with-dynamic-values/'''
 
 class Base_Drill_Form_GET(forms.ModelForm):
 
-    def __init__ (self, club, area, *args, **kwargs):
+    def __init__ (self, club, phase, *args, **kwargs):
         super(Base_Drill_Form_GET, self).__init__(*args, **kwargs)
         self.fields['area'] = forms.CharField(initial=get_initial_area(club))
-        self.fields['phase'] = forms.CharField(initial=get_initial_phase(area))
-        self.fields['drill'] = forms.ChoiceField(choices=get_drill_choices(area))
+        self.fields['phase'] = forms.CharField(initial=get_initial_phase(phase))
+        self.fields['drill'] = forms.ChoiceField(choices=get_drill_choices(phase))
         self.fields['club'] = forms.ChoiceField(choices=get_club_choices(club))
 
     class Meta:
