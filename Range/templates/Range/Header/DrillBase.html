@@ -4,10 +4,28 @@
 
 {% load static %}
 
-  <title>{% block title %}Title{% endblock %}</title>
+  <title>{% block title %}{{ club }} {{ phase}}{% endblock %}</title>
 
   <style>
-  {% block style %}{% endblock %}
+
+  {% block style %}
+  {% if club == 'Woods' %}
+    {% include 'Range/Style/WoodsStyle.html' %}
+  {% elif club == 'Hybrids' %}
+    {% include 'Range/Style/HybridsStyle.html' %}
+  {% elif club == 'Irons' %}
+    {% include 'Range/Style/IronsStyle.html' %}
+  {% elif club == 'Wedges' %}
+    {% include 'Range/Style/WedgesStyle.html' %}
+  {% elif club == 'Wedges' %}
+    {% include 'Range/Style/WedgesStyle.html' %}
+  {% elif club == 'Chipping' %}
+    {% include 'Range/Style/ChippingStyle.html' %}
+  {% elif club == 'Putting' %}
+    {% include 'Range/Style/PuttingStyle.html' %}
+  {% endif %}
+  {% endblock %}
+
   body {
     margin: 15px;
   }
@@ -45,7 +63,7 @@
     </a>
   </div>
 
-<h2>{% block pageheader %}Page Header{% endblock %}</h2>
+<h2>{% block pageheader %}{{ club }} {{ phase }}{% endblock %}</h2>
 
 {% block formbox %}
 <script>
@@ -89,33 +107,14 @@
 </div>
 
 {% block drills %}
-<div id='centerstrike'>
-  <h3>{% block drillarea1 %}Area 1{% endblock %}</h3>
-  <p> {% block drill1-1 %}{% endblock %} </p>
-  <p> {% block drill1-2 %}{% endblock %} </p>
-  <p> {% block drill1-3 %}{% endblock %} </p>
-  <p> {% block drill1-4 %}{% endblock %} </p>
-  <p> {% block drill1-5 %}{% endblock %} </p>
-  <p> {% block drill1-6 %}{% endblock %} </p>
+<div id='drills'>
+  {% if phase == 'Technical' %}
+    {% include 'Range/Drills/TechnicalDrills.html' %}
+  {% elif phase == 'Experimental' %}
+    {% include 'Range/Drills/ExperimentalDrills.html' %}
+  {% endif %}
 </div>
-<div id='clubpath' style="display: none;">
-  <h3>{% block drillarea2 %}Area 2{% endblock %}</h3>
-  <p><b>Level 1:</b> {% block drill2-1 %}{% endblock %} </p>
-  <p><b>Level 2:</b> {% block drill2-2 %}{% endblock %} </p>
-  <p><b>Level 3:</b> {% block drill2-3 %}{% endblock %} </p>
-  <p><b>Level 4:</b> {% block drill2-4 %}{% endblock %} </p>
-  <p><b>Level 5:</b> {% block drill2-5 %}{% endblock %} </p>
-  <p><b>Level 6:</b> {% block drill2-6 %}{% endblock %} </p>
-</div>
-<div id='divotlocation' style="display: none;">
-  <h3>{% block drillarea3 %}Area 3{% endblock %}</h3>
-  <p><b>Level 1:</b> {% block drill3-1 %}{% endblock %} </p>
-  <p><b>Level 2:</b> {% block drill3-2 %}{% endblock %} </p>
-  <p><b>Level 3:</b> {% block drill3-3 %}{% endblock %} </p>
-  <p><b>Level 4:</b> {% block drill3-4 %}{% endblock %} </p>
-  <p><b>Level 5:</b> {% block drill3-5 %}{% endblock %} </p>
-  <p><b>Level 6:</b> {% block drill3-6 %}{% endblock %} </p>
-</div>
+
 {% endblock %}
 
 {% block drillhistory %}
@@ -168,6 +167,15 @@
     document.getElementById('centerstrike').style.display="none";
     document.getElementById('clubpath').style.display="none";
     document.getElementById('divotlocation').style.display="block";
+  }
+
+  function showhook() {
+    document.getElementsByClassName('hook').style.display="block";
+    document.getElementsByClassName('slice').style.display="none";
+  }
+  function showslice() {
+    document.getElementsByClassName('hook').style.display="none";
+    document.getElementsByClassName('slice').style.display="block";
   }
 
   {% block script %} {% endblock %}
