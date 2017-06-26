@@ -1,25 +1,18 @@
-<style>
-  .gb1{
-    margin: 4px 2px 4px 2px;
-    width: 100px;
-  }
-</style>
+{% extends 'Range/Header/DrillBase.html' %}
 
-<h3>Woods Test</h3>
+{% block drillarea1 %}Center Hit Drills{% endblock %}
+  {% block drill1-1 %}Heel and Toe Hits.{% endblock %}
+  {% block drill1-2 %}High and Low Face Hits.{% endblock %}
+  {% block drill1-3 %}Block practice 10 shots - three-quarter swing.{% endblock %}
+{% block drillarea2 %}Club Path Drills{% endblock %}
+  {% block drill2-1 %}Weak and Strong Grip.{% endblock %}
+  {% block drill2-2 %}{% endblock %}
+  {% block drill2-3 %}{% endblock %}
+{% block drillarea3 %}Angle of Attack Drills{% endblock %}
+  {% block drill3-1 %}High and Low Face Hits.{% endblock %}
+  {% block drill3-2 %}{% endblock %}
+  {% block drill3-3 %}{% endblock %}
 
-<div id='topleft'>
-     <form method="POST">{% csrf_token %}
-         <p class="gb1">Date: {{ form.date }}</p>
+  {% block drill_table_header1 %}{% endblock %}
 
-         {% for i in range %}
-         <p><b>Shot: {{ i }}</b></p>
-         <p class="gb1">Strike: {{ form.center_strike }}</p>
-         <p class="gb1">AofA: {{ form.angle_of_attack }}</p>
-         <p class="gb1">Path: {{ form.club_face_path }}</p>
-         {% endfor %}
-
-        <button class="gb1" type="submit" class="save btn btn-default">Submit</button>
-
-
-    </form>
-</div>
+  {% block drill_table_row1 %}{% endblock %}
